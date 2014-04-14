@@ -223,11 +223,6 @@ sub lock_and_flush_queue {
 sub enqueue_event {
 	my %event;
 
-	# Scoop all the Nagios related stuff out of the environment.
-	while ((my $k, my $v) = each %ENV) {
-		next unless $k =~ /^(ICINGA|NAGIOS)_(.*)$/;
-		$event{$2} = $v;
-	}
 
 	# Apply any other variables that were passed in.
 	%event = (%event, %opt_fields);
